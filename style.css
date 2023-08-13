@@ -1,0 +1,185 @@
+::after,
+::before,
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --blue-color: hsl(219, 85%, 26%);
+  --comment-bgc: hsl(211, 68%, 94%);
+  --body-bgc: hsl(210, 60%, 98%);
+  --usually-color: hsl(219, 14%, 63%);
+  --special-event: hsl(219, 12%, 42%);
+  --user-name-hover-color: hsl(210, 60%, 98%);
+  --user-name-color: hsl(224, 21%, 14%);
+}
+html {
+  color-scheme: light dark;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+button {
+  border: none;
+  background-color: transparent;
+  display: block;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--body-bgc);
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+main {
+  border-radius: 8px;
+  transform: translateY(calc(5% - 0.75em));
+  margin-inline: auto;
+  max-width: 800px;
+  background-color: #fff;
+  display: grid;
+  padding: 2em;
+  row-gap: 1.5em;
+  height: calc(90% + 1.5em);
+  grid-template-rows: max-content 1fr;
+}
+
+/* header */
+main > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header button {
+  font-size: 1em;
+  transition: color 300ms;
+  color: var(--special-event);
+}
+
+h1 {
+  display: flex;
+  column-gap: 3%;
+  align-items: center;
+  color: var(--user-name-color);
+}
+
+.header-decoration {
+  background-color: var(--blue-color);
+  border-radius: 8px;
+  padding: 0 0.8em;
+  color: white;
+  font-size: 0.8em;
+}
+
+/* section */
+
+.link,
+.comment,
+.user-name,
+button {
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.content {
+  display: grid;
+  row-gap: 0.5em;
+}
+.content > div {
+  column-gap: 3%;
+  display: grid;
+  padding: 1em;
+  align-items: center;
+  grid-template-columns: minmax(3em, 8%) calc(92% - 1em);
+  row-gap: 1em;
+  border-radius: 8px;
+}
+.content > div > div {
+  display: grid;
+  column-gap: 2%;
+  grid-template-areas: "p1 img" "p2 img";
+}
+
+.content > div > div > img {
+  height: 3em;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.content > div > div > p:nth-child(2) {
+  grid-area: p2;
+}
+.unread {
+  background-color: var(--body-bgc);
+}
+.user-name {
+  cursor: pointer;
+  padding-right: 0.3em;
+  font-weight: 800;
+  transition: color 300ms;
+  color: var(--user-name-color);
+}
+
+.user-name:hover,
+.link.info:hover,
+header button:hover {
+  color: var(--blue-color);
+}
+
+.link.info {
+  color: var(--special-event);
+}
+.link.club {
+  color: var(--blue-color);
+}
+.link.club:visited {
+  color: var(--special-event);
+}
+
+.content p {
+  color: var(--usually-color);
+}
+
+.content > div:is(.unread) > div > p:nth-child(1)::after {
+  content: "";
+  height: 0.8em;
+  transform: translate(0.3em, 50%);
+  position: absolute;
+  aspect-ratio: 1/1;
+  background-color: hsl(1, 90%, 64%);
+  border-radius: 50%;
+}
+
+/* element with comment*/
+.comment {
+  transition: background-color 300ms;
+  padding: 1.2em 3%;
+  border-radius: 8px;
+  border: 1px solid var(--comment-bgc);
+  grid-column: 2/3;
+}
+.comment:hover {
+  background-color: var(--comment-bgc);
+}
+
+@media (width < 640px) {
+  main {
+    row-gap: .6em;
+    padding: 1.5em 1em;
+    transform: translateY(0);
+    height: 100%;
+  }
+  h1 {
+    font-size: 1.3em;
+  }
+}
+@media (width < 470px) {
+  p {
+    font-size: 14px;
+  }
+}
